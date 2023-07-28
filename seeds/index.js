@@ -1,6 +1,6 @@
 seedGenre = require('./genre-seeds');
 seedAuthor = require('./author-seeds');
-seedBook = require('./book-seeds');
+seedBook = require('./bookData');
 
 const sequelize = require('../config/connection');
 
