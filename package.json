@@ -1,7 +1,7 @@
 {
   "name": "crowd-funding",
   "version": "1.0.0",
-  "description": "",
+  "description": "The goal of this project is to create a full stack web application for avid readers and bookworms! The user should be able to create a review of a book, and other users should be able to comment on the review. The user will need to be logged in to an account in order to create a post/comment, but any user will be able to read reviews and comments.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
