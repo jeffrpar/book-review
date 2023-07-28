@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Book, User } = require('../models');
+const { Author, Book } = require('../models');
 
 // GET all books for homepage
 router.get('/', async (req, res) => {
@@ -7,8 +7,8 @@ router.get('/', async (req, res) => {
     const dbBookData = await Book.findAll({
       include: [
         {
-          model: Book,
-          attributes: ['id', 'title'],
+          model: Author,
+          attributes: ['id', 'author_name'],
         },
       ],
     });
@@ -18,10 +18,12 @@ router.get('/', async (req, res) => {
     );
 
     res.render('homepage', {
-      galleries,
+      books,
     });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
+
+module.exports = router;
