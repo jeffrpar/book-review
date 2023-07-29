@@ -15,8 +15,8 @@ Book.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        // Define a column for the book's name.
-        book_name: {
+        // Define a column for the book's title.
+        title: {
             type: DataTypes.STRING,
             allowNull: false,
         },
@@ -34,7 +34,7 @@ Book.init(
 
         // Define a column for the book's author.
         author_name: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             references: {
                 model: 'author',
                 key: 'id',
@@ -43,7 +43,7 @@ Book.init(
 
         // Define a column for the book's genre.
         genre_name: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             references: {
                 model: 'genre',
                 key: 'id',
