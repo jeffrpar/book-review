@@ -7,6 +7,12 @@ const sequelize = require('./config/connection');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+///////test for helloworld on heroku
+app.get('/helloworld', (req, res) => {
+  res.send('Helloworld');
+});
+
+//////////////end test
 
 // Create the Handlebars.js engine object with custom helper functions
 const hbs = exphbs.create({ helpers });
@@ -22,5 +28,5 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(routes);
 
 sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => console.log('Now listening'));
+  app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
 });
