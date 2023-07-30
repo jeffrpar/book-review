@@ -7,12 +7,14 @@ const sequelize = require('./config/connection');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-///////test for helloworld on heroku
-app.get('/helloworld', (req, res) => {
-  res.send('Helloworld');
+///////test for helloworld on heroku////////////////////
+// app.get('/helloworld', (req, res) => {
+//   res.send('Helloworld');
+// });
+app.get('/', (req, res) => {
+  res.render('homepage', {books: []}); // Or whatever your data source is
 });
-
-//////////////end test
+//////////////end test///////////////////////////////
 
 // Create the Handlebars.js engine object with custom helper functions
 const hbs = exphbs.create({ helpers });
@@ -24,6 +26,7 @@ app.set('view engine', 'handlebars');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.use(routes);
 
