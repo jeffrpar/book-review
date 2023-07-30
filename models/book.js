@@ -33,7 +33,7 @@ Book.init(
         },
 
         // Define a column for the book's author.
-        author_name: {
+        author_id: {
             type: DataTypes.INTEGER,
             references: {
                 model: 'author',
@@ -42,7 +42,7 @@ Book.init(
         },
 
         // Define a column for the book's genre.
-        genre_name: {
+        genre_id: {
             type: DataTypes.INTEGER,
             references: {
                 model: 'genre',
