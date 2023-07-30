@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3001;
 //   res.send('Helloworld');
 // });
 app.get('/', (req, res) => {
-  res.render('homepage', {books: []}); // Or whatever your data source is
+  res.render('homepage', {books: []}); 
 });
 //////////////end test///////////////////////////////
 
