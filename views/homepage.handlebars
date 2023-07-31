@@ -1,2 +1,46 @@
-{{#each books as |book|}}
-{{/each}}
+{{!-- {{#each books as |book|}} --}}
+{{!-- {{/each}} --}}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Exchange Platform</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+            <a href="/profile">Profile</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Welcome to the Book Exchange Platform</h1>
+        
+        <section class="search-bar">
+           
+        </section>
+        
+        <section class="featured-books">
+            <h2>Featured Books</h2>
+          
+            {{#each books}}
+                <div class="book">
+                    <img src="{{this.coverImage}}" alt="Cover image of {{this.title}}">
+                    <h3>{{this.title}}</h3>
+                    <p>By {{this.author}}</p>
+                </div>
+            {{/each}}
+        </section>
+    </main>
+
+    <footer>
+        
+    </footer>
+</body>
+</html>
