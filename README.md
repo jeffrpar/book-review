@@ -18,8 +18,4 @@ On the landing page for the app, we would show books that have been reviewed, wh
 ## User Profile: Users can view and edit their personal information, including their username, email address, and their book list.
 
 
-front end takecare all handlebars files public file css style (views folder, partials folder public folder) 
 
-backend takcare all routes and contorolers files ( controllers folder, routes folder, config, )
-
-database: take care modles folder  user.js 
