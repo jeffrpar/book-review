@@ -4,18 +4,12 @@ const exphbs = require('express-handlebars');
 const routes = require('./controllers');
 const helpers = require('./utils/helpers');
 const sequelize = require('./config/connection');
+const { Book, Author } = require('./models');
+
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-///////test for helloworld on heroku////////////////////
-// app.get('/helloworld', (req, res) => {
-//   res.send('Helloworld');
-// });
 
-app.get('/', (req, res) => {
-  res.render('homepage', {books: []}); 
-});
-//////////////end test///////////////////////////////
 
 // Create the Handlebars.js engine object with custom helper functions
 const hbs = exphbs.create({ helpers });
@@ -31,6 +25,29 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
+///////test for homepage////////////////////
+
+
+app.get('/', async (req, res) => {
+  try {
+    const books = await Book.findAll({
+      include: [
+        {
+          model: Author,
+          as: 'author',
+          attributes: ['author_name'],
+        },
+      ],
+    });
+    res.render('homepage', { books });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server Error');
+  }
+});
+
+//////////////end test///////////////////////////////
+
 sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+  app.listen(PORT, () => console.log(`Server is running on port http://localhost:${PORT}`));
 });

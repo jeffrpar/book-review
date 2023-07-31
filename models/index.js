@@ -8,17 +8,21 @@ const Exchange = require('./exchange');
 
 // Book belongs to a Genre.
 Book.belongsTo(Genre, {
-    foreignKey: 'genre_name',
+    foreignKey: 'genre_id',
 });
 
 // Book belongs to an Author.
 Book.belongsTo(Author, {
-    foreignKey: 'author_name',
+    foreignKey: 'author_id',
 });
 
 // Genre has many books.
 Genre.hasMany(Book, {
-    foreignKey: 'genre_name',
+    foreignKey: 'genre_id',
+});
+
+Author.hasMany(Book, {
+  foreignKey: 'author_id',
 });
 
 //users can ecahange more than one

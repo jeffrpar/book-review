@@ -3,12 +3,15 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Exchange Platform</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+
 <body>
     <header>
         <nav>
@@ -16,31 +19,35 @@
             <a href="/login">Login</a>
             <a href="/register">Register</a>
             <a href="/profile">Profile</a>
+            <input type="text" placeholder="Search for books.." name="search">
+            <button type="submit"><i class="fa fa-search"></i></button>
         </nav>
     </header>
 
     <main>
-        <h1>Welcome to the Book Exchange Platform</h1>
-        
+        {{!-- <h1>Welcome to the Book Exchange Platform</h1> --}}
+
         <section class="search-bar">
-           
+
         </section>
-        
+
         <section class="featured-books">
             <h2>Featured Books</h2>
-          
+
             {{#each books}}
-                <div class="book">
-                    <img src="{{this.coverImage}}" alt="Cover image of {{this.title}}">
-                    <h3>{{this.title}}</h3>
-                    <p>By {{this.author}}</p>
-                </div>
+            <div class="book">
+                <img src="{{this.book_cover}}" alt="Cover image of {{this.title}}">
+                <h3>{{this.title}}</h3>
+                <p>By {{this.author.author_name}}</p>
+            </div>
             {{/each}}
+
         </section>
     </main>
 
     <footer>
-        
+
     </footer>
 </body>
+
 </html>

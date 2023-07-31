@@ -4,13 +4,13 @@ const { Author } = require('../models');
 // Creates an array of genres to then populate the database.
 const authorData = [
     {
-        author_name: 'John Lennon',
+        author_name: 'Sunyi Dean',
     },
     {
-        author_name: 'Harry Potter',
+        author_name: 'Walter Isaacson',
     },
     {
-        author_name: 'Donald Trump',
+        author_name: 'Golden Books',
     },
     {
         author_name: 'Joe Biden',
