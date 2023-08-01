@@ -28,23 +28,23 @@ app.use(routes);
 ///////test for homepage////////////////////
 
 
-app.get('/', async (req, res) => {
-  try {
-    const books = await Book.findAll({
-      // include: [
-      //   {
-      //     model: Author,
-      //     as: 'author',
-      //     attributes: ['author_name'],
-      //   },
-      // ],
-    });
-    res.render('homepage', { books });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Server Error');
-  }
-});
+// app.get('/', async (req, res) => {
+//   try {
+//     const books = await Book.findAll({
+//       // include: [
+//       //   {
+//       //     model: Author,
+//       //     as: 'author',
+//       //     attributes: ['author_name'],
+//       //   },
+//       // ],
+//     });
+//     res.render('homepage', { books });
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).send('Server Error');
+//   }
+// });
 
 //////////////end test///////////////////////////////
 
