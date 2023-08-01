@@ -1,8 +1,6 @@
-{{!-- The template for the book information page. --}}
-{{#each books}}
     <div class="book">
         <img src="{{this.book_cover}}" alt="Cover image of {{this.title}}">
         <h3>{{this.title}}</h3>
         <p>By {{this.author.author_name}}</p>
+        <p>Genre: {{this.genre.genre_name}}</p>
     </div>
-{{/each}}
