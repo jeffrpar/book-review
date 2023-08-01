@@ -31,13 +31,13 @@ app.use(routes);
 app.get('/', async (req, res) => {
   try {
     const books = await Book.findAll({
-      include: [
-        {
-          model: Author,
-          as: 'author',
-          attributes: ['author_name'],
-        },
-      ],
+      // include: [
+      //   {
+      //     model: Author,
+      //     as: 'author',
+      //     attributes: ['author_name'],
+      //   },
+      // ],
     });
     res.render('homepage', { books });
   } catch (err) {
