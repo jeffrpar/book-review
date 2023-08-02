@@ -24,6 +24,7 @@ const authorData = [
     {
         author_name: 'Joe',
     },
+    
 ]
 
 const seedAuthor = () => Author.bulkCreate(authorData);

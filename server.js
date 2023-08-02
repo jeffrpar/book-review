@@ -5,6 +5,9 @@ const routes = require('./controllers');
 const helpers = require('./utils/helpers');
 const sequelize = require('./config/connection');
 const { Book, Author } = require('./models');
+const session = require('express-session');
+const userController = require('./controllers/userControllers');
+const passport = require('passport');
 
 
 const app = express();
@@ -21,32 +24,34 @@ app.set('view engine', 'handlebars');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({ secret: 'your-secret-key', resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 
 app.use(routes);
 
-///////test for homepage////////////////////
 
+app.get('/', async (req, res) => {
+  try {
+    const books = await Book.findAll({
+      include: [
+        {
+          model: Author,
+          as: 'author',
+          attributes: ['author_name'],
+        },
+      ],
+    });
+    res.render('homepage', { books });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server Error');
+  }
+});
+app.use('/', userController);
 
-// app.get('/', async (req, res) => {
-//   try {
-//     const books = await Book.findAll({
-//       // include: [
-//       //   {
-//       //     model: Author,
-//       //     as: 'author',
-//       //     attributes: ['author_name'],
-//       //   },
-//       // ],
-//     });
-//     res.render('homepage', { books });
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).send('Server Error');
-//   }
-// });
-
-//////////////end test///////////////////////////////
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log(`Server is running on port http://localhost:${PORT}`));
