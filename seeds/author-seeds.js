@@ -13,16 +13,55 @@ const authorData = [
         author_name: 'Golden Books',
     },
     {
-        author_name: 'Joe Biden',
+        author_name: 'David Goggins',
     },
     {
-        author_name: 'Uvufuevuevue Osas',
+        author_name: 'James Clear',
     },
     {
-        author_name: 'Mike Perry',
+        author_name: 'Kai Bird',
     },
     {
-        author_name: 'Joe',
+        author_name: 'Rebecca Yarros',
+    },
+    {
+        author_name: 'Bonnie Garmus',
+    },
+    {
+        author_name: 'Abraham Verghese',
+    },
+    {
+        author_name: 'Barbara Kingsolver',
+    },
+    {
+        author_name: 'Peter Attia MD',
+    },
+    {
+        author_name: 'Freida McFadden',
+    },
+    {
+        author_name: 'Margot Hunt',
+    },
+    {
+        author_name: 'Mark Manson',
+    },
+    {
+        author_name: 'J.K. Rowling',
+    },
+    {
+        author_name: 'Pierce Brown',
+    },
+    {
+        author_name: 'Sarah J. Maas',
+    },
+    {
+        author_name: 'Matthew McConaughey',
+    },
+    {
+        author_name: 'Colleen Hoover',
+    },
+    {
+        author_name: 'Jennette McCurdy',
     },
 ]
 
