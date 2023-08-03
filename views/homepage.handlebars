@@ -35,9 +35,11 @@
 
             {{#each books}}
             <div class="book">
-                <img src="{{this.book_cover}}" alt="Cover image of {{this.title}}">
-                <h3>{{this.title}}</h3>
-                <p>By {{this.author.author_name}}</p>
+                <a href="/books/{{this.id}}">
+                    <img src="{{this.book_cover}}" alt="Cover image of {{this.title}}">
+                    <h3>{{this.title}}</h3>
+                    <p>By {{this.author.author_name}}</p>
+                </a>
             </div>
             {{/each}}
 
