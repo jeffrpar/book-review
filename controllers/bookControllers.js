@@ -113,5 +113,43 @@ router.delete('/:id', (req, res) => {
 });
 
 
+//////////////////
+
+router.get('/:id', async (req, res) => {
+    try {
+      const dbBookData = await Book.findOne({
+        where: {
+          id: req.params.id,
+        },
+        include: [
+          {
+            model: Author,
+            as: 'author',
+            attributes: ['author_name'],
+          },
+        ],
+      });
+  
+      if (!dbBookData) {
+        res.status(404).json({ message: 'No book found with this id' });
+        return;
+      }
+  
+      const book = dbBookData.get({ plain: true });
+  
+      res.render('book', {
+        book,
+      });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  });
+
+
+
+//////////////
+
+
 
 module.exports = router;

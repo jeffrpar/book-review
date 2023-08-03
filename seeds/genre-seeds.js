@@ -4,7 +4,7 @@ const { Genre } = require('../models');
 // Creates an array of genres to then populate the database.
 const genreData = [
     {
-        genre_name: 'Sci-Fi',
+        genre_name: 'Fantasy Fiction',
     },
     {
         genre_name: 'Horror',

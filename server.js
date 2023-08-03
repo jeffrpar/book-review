@@ -8,9 +8,10 @@ const { Book, Author } = require('./models');
 const session = require('express-session');
 const userController = require('./controllers/userControllers');
 const passport = require('passport');
-
+const bookController = require('./controllers/bookControllers');
 
 const app = express();
+app.use('/books', bookController);
 const PORT = process.env.PORT || 3001;
 
 
