@@ -3,3 +3,11 @@
     height: auto;
 }
 
+nav h1 {
+    color: white;
+}
+
+body {
+    padding: 0px;
+    margin: 0px;
+}

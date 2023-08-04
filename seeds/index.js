@@ -1,6 +1,7 @@
 seedGenre = require('./genre-seeds');
 seedAuthor = require('./author-seeds');
 seedBook = require('./book-seeds');
+seedUser = require('./user-seeds');
 
 const sequelize = require('../config/connection');
 
@@ -15,6 +16,9 @@ const seedAll = async() => {
   
     await seedBook();
     console.log('\n----- BOOKS SEEDED -----\n');
+
+    await seedUser();
+    console.log('\n----- USERS SEEDED -----\n');
   
     process.exit(0);
 };

@@ -1,98 +1,111 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 const { User } = require('../models');
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
-const saltRounds = 10;
-
-
-
-//////passport///////////////////
-passport.use(new LocalStrategy(
-  {
-    usernameField: 'email', 
-    passwordField: 'password',
-  },
-  async (email, password, done) => {
-    try {
-      const user = await User.findOne({ where: { email } });
-      if (!user) {
-        return done(null, false, { message: 'Incorrect email or password.' });
-      }
-      const isValidPassword = await bcrypt.compare(password, user.password);
-      if (!isValidPassword) {
-        return done(null, false, { message: 'Incorrect email or password.' });
-      }
-      return done(null, user);
-    } catch (err) {
-      return done(err);
-    }
-  }
-));
-
   
-  passport.serializeUser((user, done) => {
-    done(null, user.id);
+
+// GET from /api/users
+router.get('/', (req, res) => {
+  User.findAll({
+      attributes: { exclude: ['password']}
+  })
+  .then(dbUserData => res.json(dbUserData))
+  .catch(err => {
+      console.log(err); 
+      res.status(500).json(err);
   });
-  
-  passport.deserializeUser(async (id, done) => {
-    try {
-      const user = await User.findByPk(id);
-      done(null, user);
-    } catch (err) {
-      done(err, null);
-    }
-  });
-// User registration////////////////////////////////////////
-router.post('/register', async (req, res) => {
+});
+
+// GET from a specific user EXAMPLE: /api/users/1
+router.get('/:id', (req, res) => {
+  User.findOne({
+      attributes: { exclude: ['password'] },
+      where: {
+        id: req.params.id
+      },
+    })
+    .then(dbUserData => {
+      if (!dbUserData) {
+        res.status(404).json({ message: 'No user found with this id' });
+        return;
+      }
+      res.json(dbUserData);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
+// POST/CREATE a new user.
+router.post('/', async (req, res) => {
   try {
-    const { username, email, password } = req.body;
-
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
-
-    // Create new user with hashed password
-    const newUser = await User.create({
-      username,
-      email,
-      password: hashedPassword, // save hashed password
+    const dbUserData = await User.create({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
     });
 
-    res.redirect('/login');
+    req.session.save(() => {
+      req.session.loggedIn = true;
+      res.status(200).json(dbUserData);
+    });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: 'Registration failed' });
+    res.status(500).json(err);
   }
 });
 
-
-
-// User login//////////////////////////////////////
+// Login
 router.post('/login', async (req, res) => {
   try {
-    const { email, password } = req.body;
-    const user = await User.findOne({ where: { email } });
+    const dbUserData = await User.findOne({
+      where: {
+        email: req.body.email,
+      },
+    })
 
-    // Check if user exists and password is correct
-    if (user && await bcrypt.compare(password, user.password)) {
-      req.session.userId = user.id;
-      res.redirect('/profile');
-    } else {
-      res.redirect('/login?error=1');
+    if (!dbUserData) {
+      res.status(400).json({
+        message: 'Incorrect email or password. Please try again!'
+      });
+      return;
     }
+
+    const validPassword = await dbUserData.checkPassword(req.body.password);
+
+    if (!validPassword) {
+      res.status(400).json({
+        message: 'Incorrect email or password. Please try again!',
+      });
+      return;
+    }
+
+    // Once the user successfully logs in, set up the sessions variable 'loggedIn'
+    req.session.save(() => {
+      req.session.loggedIn = true;
+
+      res.status(200).json({
+        user: dbUserData, message: 'You are now logged in!'
+      });
+    })
+
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: 'Login failed' });
+    res.status(500).json(err);
   }
 });
 
-router.get('/login', function(req, res) {
-  res.render('login'); 
+// Logout
+router.post('/logout', (req, res) => {
+  // Session destroyed once user logout
+  if (req.session.loggedIn) {
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
+  } else {
+    res.status(404).end();  
+  }
 });
 
-router.get('/register', function(req, res) {
-  res.render('register');  
-});
 
 module.exports = router;

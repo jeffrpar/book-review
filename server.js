@@ -1,58 +1,58 @@
-const path = require('path');
+// Imports the fundamental packages.
 const express = require('express');
-const exphbs = require('express-handlebars');
-const routes = require('./controllers');
-const helpers = require('./utils/helpers');
 const sequelize = require('./config/connection');
-const { Book, Author } = require('./models');
-const session = require('express-session');
-const userController = require('./controllers/userControllers');
-const passport = require('passport');
+const path = require('path');
+const routes = require('./controllers');
 
+// Imports the helper fuctions / handlebars packages.
+const helpers = require('./utils/helpers');
+const exphbs = require('express-handlebars');
+
+
+// Imports the session package to sequelize with the database.
+const session = require('express-session');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// To connect session to sequelize.
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-// Create the Handlebars.js engine object with custom helper functions
+
+const sess = {
+    secret: 'Super secret secret',
+    cookie: {
+        maxAge: 24 * 60 * 60 * 1000,
+        httpOnly: true,
+        secure: false,
+        sameSite: 'strict',
+    },
+    resave: false,
+    saveUninitialized: true,
+    store: new SequelizeStore({
+        db: sequelize,
+      }),
+};
+
+app.use(session(sess));
+
+// Implements the helpers util as middlewere.
 const hbs = exphbs.create({ helpers });
 
-// Inform Express.js which template engine we're using
+// Set default template engine for the program.
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
+// Middleware.
+app.use(session(sess));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({ secret: 'your-secret-key', resave: false, saveUninitialized: true }));
-app.use(passport.initialize());
-app.use(passport.session());
-
-
 
 app.use(routes);
 
 
-app.get('/', async (req, res) => {
-  try {
-    const books = await Book.findAll({
-      include: [
-        {
-          model: Author,
-          as: 'author',
-          attributes: ['author_name'],
-        },
-      ],
-    });
-    res.render('homepage', { books });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Server Error');
-  }
-});
-app.use('/', userController);
-
-
+// Initialize the server.
 sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => console.log(`Server is running on port http://localhost:${PORT}`));
-});
+    app.listen(PORT, () => console.log(`Now listening on http://localhost:${PORT}`))
+})
