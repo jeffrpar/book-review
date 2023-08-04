@@ -41,13 +41,30 @@ Book.init(
             }
         },
 
-        // Define a column for the book's genre.
         genre_id: {
             type: DataTypes.INTEGER,
             references: {
                 model: 'genre',
                 key: 'id',
             }
+        },
+
+        amazon_link: {
+            type: DataTypes.STRING,
+            allowNull: true, 
+        },
+
+        about: {
+            type: DataTypes.STRING,
+            allowNull: true, 
+        },
+        pages: {
+            type: DataTypes.STRING,
+            allowNull: true, 
+        },
+        Language: {
+            type: DataTypes.STRING,
+            allowNull: true, 
         }
     },
     {
@@ -58,5 +75,7 @@ Book.init(
         modelName: 'book',
     }
 );
+  
+
 
 module.exports = Book;

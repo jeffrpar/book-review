@@ -13,6 +13,9 @@ const exphbs = require('express-handlebars');
 const session = require('express-session');
 
 const app = express();
+
+const bookController = require('./controllers/bookControllers');
+app.use('/books', bookController);
 const PORT = process.env.PORT || 3001;
 
 // To connect session to sequelize.
