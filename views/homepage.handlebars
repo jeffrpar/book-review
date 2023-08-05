@@ -14,6 +14,28 @@
 
 <body>
 
+  <header class="display-flex justify-space-between align-center p-2">
+    <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+      <h1>Welcome to the Book view Platform</h1>
+      <!-- Navbar content -->
+      
+      <!-- If the user is logged in, show a logout button -->
+      {{#if loggedIn}}
+      <a href="/">Home</a>
+      <a href="/login">Login</a>
+      <a href="/profile">Profile</a>
+      <button id="logout" class="btn-no-style">Logout</button>
+      <section class="search-bar">
+        <input type="text" placeholder="Search for books.." name="search">
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </section>
+      {{else}}
+      <!-- Otherwise, show a link to login -->
+      <a href="/">Home</a>
+      <a href="/login">Login</a> 
+      {{/if}}
+    </nav>
+  </header>
 
 
 
