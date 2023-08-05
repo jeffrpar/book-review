@@ -7,10 +7,10 @@ const genreData = [
         genre_name: 'Fantasy Fiction',
     },
     {
-        genre_name: 'Horror',
+        genre_name: 'Technology',
     },
     {
-        genre_name: 'Comedy',
+        genre_name: 'Children Book',
     },
     {
         genre_name: 'Action',
@@ -26,6 +26,9 @@ const genreData = [
     },
     {
         genre_name: 'Fantasy',
+    },
+    {
+        genre_name: 'Audio Book',
     },
 ];
 
