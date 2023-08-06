@@ -32,29 +32,17 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
-router.get('/profile', async (req, res) => {
+router.get('/profile', (req, res) => {
+
   if(!req.session.loggedIn) {
-      res.redirect('/login');
-      return; 
-  }
+    res.redirect('/login');
+    return; 
+}
 
-  // User.findOne({
-  //   attributes: { exclude: ['password'] },
-  //   where: {
-  //     email: req.session.email
-  //   },
-  // })
-  //   .then(dbUserData => {
-  //     // serialize DATA
-  //     const user = dbUserData.map(user => user.get({ plain: true }));
-  //     res.render('profile', { user, loggedIn: true });
-  //   })
-  //   .catch(err => {
-  //     console.log(err);
-  //     res.status(500).json(err);
-  //   });
+  
+  res.render('profile', {user: req.session.user , loggedIn: req.session.loggedIn});
 
-  res.render('profile');
+  
 });
 
 module.exports = router;

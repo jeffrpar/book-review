@@ -31,6 +31,8 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
+
+
     try {
         const bookData = await Book.findOne({
             where: {
@@ -51,9 +53,8 @@ router.get('/:id', async (req, res) => {
 
         // Serialize the data.
         const book = bookData.get({ plain: true })
-        
-        console.log(book)
-        res.render('book-description',  book );
+    
+        res.render('book-description',  book);
 
     } catch (err) {
         console.log(err);
