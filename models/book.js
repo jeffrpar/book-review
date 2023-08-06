@@ -53,6 +53,11 @@ Book.init(
             type: DataTypes.STRING,
             allowNull: true, 
         },
+        review_link: {
+            type: DataTypes.STRING,
+            allowNull: true, 
+        },
+        
 
         about: {
             type: DataTypes.STRING,
