@@ -1,12 +1,11 @@
-    <div class="book">
-        <img src="{{this.book_cover}}" alt="Cover image of {{this.title}}">
-        <h3>{{this.title}}</h3>
-        <p>By {{this.author.author_name}}</p>
-        <p>Genre: {{this.genre.genre_name}}</p>
-        <p>Published: {{this.book_date}}</p>
-        <p>pages: {{this.pages}}</p>
-        <p>Language: {{this.Language}}</p>
-        <p>Review: {{this.about}}</p>
-        <a href="{{this.amazon_link}}">Buy on Amazon</a>
-
-    </div>
+<div class="book">
+    <img src="{{bookDetails.book_cover}}" alt="Cover image of {{bookDetails.title}}">
+    <h3>{{bookDetails.title}}</h3>
+    <p>By {{bookDetails.author.author_name}}</p>
+    <p>Genre: {{bookDetails.genre.genre_name}}</p>
+    <p>Published: {{bookDetails.book_date}}</p>
+    <p>Pages: {{bookDetails.pages}}</p>
+    <p>Language: {{bookDetails.Language}}</p>
+    <p>Review: {{bookDetails.about}}</p>
+    <a href="{{bookDetails.amazon_link}}">Buy on Amazon</a>
+</div>

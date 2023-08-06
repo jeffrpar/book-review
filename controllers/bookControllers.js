@@ -1,4 +1,5 @@
-const router = require('express').Router();
+const express = require('express');
+const router = express.Router();
 const { Book, Author, Genre } = require('../models');
 
 /////////////////////////////////////////////////////////////
@@ -13,17 +14,17 @@ router.get('/', async (req, res) => {
             include: [
                 {
                     model: Author,
-                    attributes: ['id','author_name'],
+                    attributes: ['id', 'author_name'],
                 },
             ],
         });
         // Serialize the data.
-        const books = bookData.map((book) => 
+        const books = bookData.map((book) =>
             book.get({ plain: true })
         );
 
         // Renders the data to the book template.
-        res.render('book', {books});
+        res.render('homepage', { books });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -36,31 +37,32 @@ router.get('/:id', async (req, res) => {
             where: {
                 id: req.params.id,
             },
-
-            include: [{
-                model: Author,
-                attributes: ['id','author_name'],
-            },
-            {
-                model: Genre,
-                attributes: ['id', 'genre_name'],
-            },],
-
+            include: [
+                {
+                    model: Author,
+                    attributes: ['id', 'author_name'],
+                },
+                {
+                    model: Genre,
+                    attributes: ['id', 'genre_name'],
+                },
+            ],
         });
 
+        if (!bookData) {
+            res.status(404).json({ message: 'No book found with this id' });
+            return;
+        }
 
-        // Serialize the data.
-        const book = bookData.get({ plain: true })
-        
-        console.log(book)
-        res.render('book-description',  book );
+        const bookDetails = bookData.get({ plain: true });
+
+        res.render('book-description', { bookDetails }); // Pass the data as an object, not directly as book.
 
     } catch (err) {
         console.log(err);
-        res.status(500).json({message: 'No book found with this id'});
-    };
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
 });
-
 
 
 /////////////////////////////////////////////////////////////
@@ -69,23 +71,22 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     // Create a new Book.---( Just in Case )---
-   try {
-    const newBook = await Book.create({
-        title: req.body.title,
-        book_cover: req.body.book_cover,
-        book_date: req.body.book_date,
-        author_id: req.body.author_id,
-        genre_id: req.body.genre_id,
-    });
-    console.log(newBook)
-    res.status(200).json(newBook)
-   } catch (err) {
-    res.status(400).json(err);
-   }
+    try {
+        const newBook = await Book.create({
+            title: req.body.title,
+            book_cover: req.body.book_cover,
+            book_date: req.body.book_date,
+            author_id: req.body.author_id,
+            genre_id: req.body.genre_id,
+        });
+        console.log(newBook)
+        res.status(200).json(newBook)
+    } catch (err) {
+        res.status(400).json(err);
+    }
 
 
 });
-
 
 /////////////////////////////////////////////////////////////
 /////////////// DELETE Methods for books. ///////////////////
@@ -99,57 +100,17 @@ router.delete('/:id', (req, res) => {
     })
         .then(data => {
             if (!data) {
-                res.status(404).json({message: 'No book found with the provided ID'});
+                res.status(404).json({ message: 'No book found with the provided ID' });
                 return;
             }
             res.json(data);
 
-            
+
         })
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
         });
 });
-
-
-//////////////////
-
-router.get('/:id', async (req, res) => {
-    try {
-      const dbBookData = await Book.findOne({
-        where: {
-          id: req.params.id,
-        },
-        include: [
-          {
-            model: Author,
-            as: 'author',
-            attributes: ['author_name'],
-          },
-        ],
-      });
-  
-      if (!dbBookData) {
-        res.status(404).json({ message: 'No book found with this id' });
-        return;
-      }
-  
-      const book = dbBookData.get({ plain: true });
-  
-      res.render('book', {
-        book,
-      });
-    } catch (err) {
-      console.log(err);
-      res.status(500).json(err);
-    }
-  });
-
-
-
-//////////////
-
-
 
 module.exports = router;
