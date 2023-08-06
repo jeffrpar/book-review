@@ -13,17 +13,17 @@
     <div class="container ">
         <div class="row ">
             <div class="book d-flex flex-column justify-content-center">
-                <img src="{{this.book_cover}}" alt="Cover image of {{this.title}}">
-                <h3>{{this.title}}</h3>
+                <img src="{{bookDetails.book_cover}}" alt="Cover image of {{bookDetails.title}}">
+                <h3>{{bookDetails.title}}</h3>
                 <div class="card">
-                    <p><span>By:</span> {{this.author.author_name}}</p>
-                    <p><span>Genre:</span> {{this.genre.genre_name}}</p>
-                    <p><span>Published:</span> {{this.book_date}}</p>
-                    <p><span>Pages:</span> {{this.pages}}</p>
-                    <p><span>Language:</span> {{this.Language}}</p>
+                    <p><span>By:</span> {{bookDetails.author.author_name}}</p>
+                    <p><span>Genre:</span> {{bookDetails.genre.genre_name}}</p>
+                    <p><span>Published:</span> {{bookDetails.book_date}}</p>
+                    <p><span>Pages:</span> {{bookDetails.pages}}</p>
+                    <p><span>Language:</span> {{bookDetails.Language}}</p>
                 </div>
-                <p id="revieww"><span>Review:</span> {{this.about}}</p>
-                <a href="{{this.amazon_link}}">Buy on Amazon</a>
+                <p id="revieww"><span>Review:</span> {{bookDetails.about}}</p>
+                <a href="{{bookDetails.amazon_link}}">Buy on Amazon</a>
 
             </div>
         </div>
