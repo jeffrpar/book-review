@@ -32,6 +32,8 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
+
+
     try {
         const bookData = await Book.findOne({
             where: {

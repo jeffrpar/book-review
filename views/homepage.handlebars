@@ -24,7 +24,7 @@
       <!-- Navbar content -->
 
       <!-- If the user is logged in, show a logout button -->
-      {{#if loggedIn}}
+      {{!-- {{#if loggedIn}}
       <a href="/">Home</a>
       <a href="/login">Login</a>
       <a href="/profile">Profile</a>
@@ -39,26 +39,35 @@
       <!-- Otherwise, show a link to login -->
       <a href="/">Home</a>
       <a href="/login">Login</a>
-      {{/if}}
+      {{/if}} --}}
     </nav>
   </header>
+
 
 
   <main>
     {{!-- <h1>Welcome to the Book Exchange Platform</h1> --}}
 
-    <section class="featured-books">
-      <h2>Featured Books</h2>
+        <section class="featured-books container-fluid">
+            <h2>Featured Books</h2>
 
-      {{#each books}}
-      <div class="book">
-        <a href="/books/{{this.id}}">
-          <img src="{{this.book_cover}}" alt="Cover image of {{this.title}}">
-          <h3>{{this.title}}</h3>
-          <p>By {{this.author.author_name}}</p>
-        </a>
-      </div>
-      {{/each}}
+            {{#each books}}
+            <div class="card" style="width: 18rem;">
+               <a href="/books/{{this.id}}">
+                    <img class="card-img-top" src="{{this.book_cover}}" alt="Cover image of {{this.title}}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.title}}</h5>
+                    </div>
+                </a>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><p>By {{this.author.author_name}}</p></li>
+                </ul>
+                <div class="card-body">
+                    <a href="/books/{{this.id}}" class="card-link">Details</a>
+                    <a href="#" class="card-link">Reviews</a>
+                </div>
+            </div>
+            {{/each}}
 
     </section>
   </main>

@@ -1,25 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>User Registry</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/css/bootstrap-grid.min.css" integrity="sha512-2cWcZ9cbPMZFm2inlFOhwsBVbNMmNxKBtVXqL8OY9tXCZahhnIfXMxPCzpKqiHF2I2mOiNHNXEDUDglwd+4uYw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/css/bootstrap-grid.min.css"
+    integrity="sha512-2cWcZ9cbPMZFm2inlFOhwsBVbNMmNxKBtVXqL8OY9tXCZahhnIfXMxPCzpKqiHF2I2mOiNHNXEDUDglwd+4uYw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="/public/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@300;400&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <header class="display-flex justify-space-between align-center p-2">
-    <h1>
-     {{!-- <p>Welcome to the Book view Platform</p> --}}
-    </h1>
+  <header class="">
+
+    <nav class="navbar bg-dark d-flex justify-content-between px-5" data-bs-theme="dark">
+      <h1><a href="/">Book <span>Finder</span></a></h1>
+      <!-- Navbar content -->
+
+      <!-- If the user is logged in, show a logout button -->
+      {{#if loggedIn}}
+      <ul class="lista">
+        <li><button class="btn-no-style"><a href="/">Home</a></button></li>
+        <li><button class="btn-no-style"><a href="/profile">Profile</a></button></li>
+        <li><button id="logout" class="btn-no-style">Logout</button></li>
+        <section class="search-bar">
+          <form action="/search" method="GET">
+            <input type="text" placeholder="Search for books.." name="search">
+            <button type="submit"><i class="fa fa-search"></i></button>
+          </form>
+        </section>
+
+      </ul>
+      {{else}}
+      <!-- Otherwise, show a link to login -->
+      <ul class="lista">
+        <li><button class="btn-no-style"><a href="/">Home</a></button></li>
+        <li><button class="btn-no-style"><a href="/login">Login</a></button></li>
+      </ul>
+
+
+      {{/if}}
+    </nav>
+
   </header>
-  <main class="container container-fluid mt-5">
+
+  <main class="container-fluid mt-5 home">
     <!-- Render the contents of the sub layout here -->
     {{{ body }}}
   </main>
   <footer>
-      
+
   </footer>
 
   {{#if loggedIn}}
@@ -28,6 +62,10 @@
   {{/if}}
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/js/bootstrap.min.js" integrity="sha512-fHY2UiQlipUq0dEabSM4s+phmn+bcxSYzXP4vAXItBvBHU7zAM/mkhCZjtBEIJexhOMzZbgFlPLuErlJF2b+0g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/js/bootstrap.min.js"
+    integrity="sha512-fHY2UiQlipUq0dEabSM4s+phmn+bcxSYzXP4vAXItBvBHU7zAM/mkhCZjtBEIJexhOMzZbgFlPLuErlJF2b+0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://kit.fontawesome.com/5e9c50042e.js" crossorigin="anonymous"></script>
 </body>
+
 </html>
