@@ -49,7 +49,7 @@
     {{!-- <h1>Welcome to the Book Exchange Platform</h1> --}}
 
         <section class="featured-books container-fluid">
-            <h2>Featured Books</h2>
+            {{!-- <h2>Featured Books</h2> --}}
 
             {{#each books}}
             <div class="card" style="width: 18rem;">
@@ -64,7 +64,9 @@
                 </ul>
                 <div class="card-body">
                     <a href="/books/{{this.id}}" class="card-link">Details</a>
-                    <a href="#" class="card-link">Reviews</a>
+                 <a href="{{this.review_link}}" class="card-link">Reviews</a>
+
+
                 </div>
             </div>
             {{/each}}

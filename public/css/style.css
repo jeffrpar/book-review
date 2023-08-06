@@ -2,10 +2,6 @@
     --background: rgb(128, 128, 128);
 }
 
-.book img {
-    width: 150px;
-    height: auto;
-}
 
 .book {
     background-color: var(--background);
@@ -17,9 +13,6 @@
     border: 2px solid aqua;
 }
 
-.card .card-img-top {
-
-}
 
 
 .card {
@@ -176,10 +169,15 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    /*  */
+    flex-direction: row;  
+    flex-wrap: wrap;  
+    /*  */
 }
 
+
 .featured-books .card {
-    margin: 30px;
+    margin: 15px;
 }
 
 .login-form {
@@ -262,3 +260,4 @@ main {
     border-radius: 10px;
     transition: ease-in-out 250ms;
 }
+
