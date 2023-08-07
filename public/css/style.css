@@ -2,7 +2,6 @@
     --background: rgb(128, 128, 128);
 }
 
-
 .book {
     background-color: var(--background);
     display: block;
@@ -12,8 +11,6 @@
     border-radius: 30px;
     border: 2px solid aqua;
 }
-
-
 
 .card {
     background-color: aliceblue;
@@ -93,6 +90,7 @@ nav h1:hover {
 
 .lista {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     justify-items: center;
     text-align: center;
