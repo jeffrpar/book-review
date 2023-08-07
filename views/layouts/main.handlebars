@@ -12,6 +12,50 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script>
+    $(function () {
+      var availableTags = [
+        'A Court of Thorns and Roses',
+        'A Not So Meet Cute',
+        'American Prometheus',
+        'Atomic Habits',
+        'Before We Were Yours: A Novel',
+        'Book Lover',
+        'Can\'t Hurt Me',
+        'Demon Copperhead',
+        'Elon Musk (Signed Book)',
+        'Fourth Wing',
+        'Greenlights',
+        'Harry Potter and the Chamber of Secrets, Book 2',
+        'I\'m Glad My Mom Died',
+        'It\'s a Small World',
+        'Lessons in Chemistry',
+        'Light Bringer',
+        'Lovely Girls',
+        'Outlive',
+        'The Book Eaters',
+        'The Book Thief',
+        'The Covenant of Water',
+        'The Five-Star Weekend',
+        'The Four Agreements',
+        'The Housemaid',
+        'The Summer House',
+        'The Subtle Art of Not Giving a F*ck',
+        'The Terminal List: A Thriller',
+        'The Wild: The Wild, Book 1',
+        'The Book of Lost Names',
+        'Verity',
+        'Wild: The Wild, Book 1',
+        'You\'d Be Home Now'
+      ];
+      $("#tags").autocomplete({
+        source: availableTags
+      });
+    });
+  </script>
 </head>
 
 <body>
@@ -29,7 +73,7 @@
         <li><button id="logout" class="btn-no-style">Logout</button></li>
         <section class="search-bar">
           <form action="/search" method="GET">
-            <input type="text" placeholder="Search for books.." name="search">
+            <input type="text" placeholder="Search for books.." name="search" id="tags">
             <button type="submit"><i class="fa fa-search"></i></button>
           </form>
         </section>
